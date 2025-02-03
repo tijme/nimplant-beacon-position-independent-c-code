@@ -74,6 +74,8 @@ As stated, this is just a minimal Proof-of-Concept (PoC) showcasing a beacon in 
 - [✅] Support implant command `cat`.
 - [✅] Support implant command `cd`.
 - [✅] Support implant command `whoami`.
+- [✅] Support implant command `ls`.
+- [✅] Support implant command `pwd`.
 - [⚠️] TODO: Support all implant configuration options.
 - [⚠️] TODO: Support jitter if sleep is used.
 - [⚠️] TODO: Support incremental delay if server not reachable.
@@ -88,12 +90,10 @@ As stated, this is just a minimal Proof-of-Concept (PoC) showcasing a beacon in 
 - [⚠️] TODO: Support implant command `get-domain`.
 - [⚠️] TODO: Support implant command `get-local-admin`.
 - [⚠️] TODO: Support implant command `inline-execute`.
-- [✅] Support implant command `ls`.
 - [⚠️] TODO: Support implant command `mkdir`.
 - [⚠️] TODO: Support implant command `mv`.
 - [⚠️] TODO: Support implant command `powershell`.
 - [⚠️] TODO: Support implant command `ps`.
-- [✅] Support implant command `pwd`.
 - [⚠️] TODO: Support implant command `reg`.
 - [⚠️] TODO: Support implant command `rm`.
 - [⚠️] TODO: Support implant command `run`.
