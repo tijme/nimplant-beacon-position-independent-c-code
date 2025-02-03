@@ -22,6 +22,7 @@ struct ModuleTable {
     HMODULE hWs2_32;
     HMODULE hAdvapi32;
     HMODULE hNtdll;
+    HMODULE hShlwapi;
 };
 
 /**
@@ -82,4 +83,10 @@ struct FunctionTable {
     BOOL (*CloseHandle)(HANDLE);
     BOOL (*ReadFile)(HANDLE, LPVOID, DWORD, LPDWORD, LPOVERLAPPED);
     DWORD (*GetFileSize)(HANDLE, LPDWORD);
+    DWORD (*GetCurrentDirectoryA)(DWORD, LPSTR);
+    HANDLE (*FindFirstFileA)(LPCSTR, LPWIN32_FIND_DATAA);
+    BOOL (*FindNextFileA)(HANDLE, LPWIN32_FIND_DATAA);
+    BOOL (*FindClose)(HANDLE);
+    DWORD (*GetFileAttributesA)(LPCSTR);
+    BOOL (*PathFileExistsA)(LPCSTR);
 };

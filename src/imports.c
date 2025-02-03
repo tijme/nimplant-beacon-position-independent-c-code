@@ -25,6 +25,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     DEFINE_STRING(Ws2_32Name, "Ws2_32.dll");
     DEFINE_STRING(Advapi32Name, "Advapi32.dll");
     DEFINE_STRING(NtdllName, "Ntdll.dll");
+    DEFINE_STRING(ShlwapiName, "Shlwapi.dll");
 
     // Load modules
     context->modules.hKernel32 = context->functions.LoadLibraryA(Kernel32ModuleName);
@@ -35,6 +36,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     context->modules.hWs2_32 = context->functions.LoadLibraryA(Ws2_32Name);
     context->modules.hAdvapi32 = context->functions.LoadLibraryA(Advapi32Name);
     context->modules.hNtdll = context->functions.LoadLibraryA(NtdllName);
+    context->modules.hShlwapi = context->functions.LoadLibraryA(ShlwapiName);
 
     // Define functions
     DEFINE_STRING(RandName, "rand");
@@ -85,6 +87,12 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     DEFINE_STRING(CloseHandleName, "CloseHandle");
     DEFINE_STRING(ReadFileName, "ReadFile");
     DEFINE_STRING(GetFileSizeName, "GetFileSize");
+    DEFINE_STRING(GetCurrentDirectoryAName, "GetCurrentDirectoryA");
+    DEFINE_STRING(FindFirstFileAName, "FindFirstFileA");
+    DEFINE_STRING(FindNextFileAName, "FindNextFileA");
+    DEFINE_STRING(FindCloseName, "FindClose");
+    DEFINE_STRING(GetFileAttributesAName, "GetFileAttributesA")
+    DEFINE_STRING(PathFileExistsAName, "PathFileExistsA");
 
     // Load functions
     context->functions.rand = (int (*)(void)) context->functions.GetProcAddress(context->modules.hUcrtBase, RandName);
@@ -132,15 +140,14 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     context->functions.fread = (size_t (*)(void*, size_t, size_t, FILE*)) context->functions.GetProcAddress(context->modules.hUcrtBase, FreadName);
     context->functions.chdir = (int (*)(const char *)) context->functions.GetProcAddress(context->modules.hUcrtBase, ChdirName);
     context->functions.CreateFileA = (HANDLE (*)(LPCSTR, DWORD, DWORD, LPSECURITY_ATTRIBUTES, DWORD, DWORD, HANDLE)) 
-        context->functions.GetProcAddress(context->modules.hKernel32, CreateFileAName);
-
-    context->functions.CloseHandle = (BOOL (*)(HANDLE)) 
-        context->functions.GetProcAddress(context->modules.hKernel32, CloseHandleName);
-
-    context->functions.ReadFile = (BOOL (*)(HANDLE, LPVOID, DWORD, LPDWORD, LPOVERLAPPED)) 
-        context->functions.GetProcAddress(context->modules.hKernel32, ReadFileName);
-
-    context->functions.GetFileSize = (DWORD (*)(HANDLE, LPDWORD)) 
-        context->functions.GetProcAddress(context->modules.hKernel32, GetFileSizeName);
-
+    context->functions.GetProcAddress(context->modules.hKernel32, CreateFileAName);
+    context->functions.CloseHandle = (BOOL (*)(HANDLE)) context->functions.GetProcAddress(context->modules.hKernel32, CloseHandleName);
+    context->functions.ReadFile = (BOOL (*)(HANDLE, LPVOID, DWORD, LPDWORD, LPOVERLAPPED)) context->functions.GetProcAddress(context->modules.hKernel32, ReadFileName);
+    context->functions.GetFileSize = (DWORD (*)(HANDLE, LPDWORD))  context->functions.GetProcAddress(context->modules.hKernel32, GetFileSizeName);
+    context->functions.GetCurrentDirectoryA = (DWORD (*)(DWORD, LPSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetCurrentDirectoryAName);
+    context->functions.FindFirstFileA = (HANDLE (*)(LPCSTR, LPWIN32_FIND_DATAA)) context->functions.GetProcAddress(context->modules.hKernel32, FindFirstFileAName);
+    context->functions.FindNextFileA = (BOOL (*)(HANDLE, LPWIN32_FIND_DATAA)) context->functions.GetProcAddress(context->modules.hKernel32, FindNextFileAName);
+    context->functions.FindClose = (BOOL (*)(HANDLE)) context->functions.GetProcAddress(context->modules.hKernel32, FindCloseName);
+    context->functions.GetFileAttributesA = (DWORD (*)(LPCSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetFileAttributesAName);
+    context->functions.PathFileExistsA = (BOOL (*)(LPCSTR)) context->functions.GetProcAddress(context->modules.hShlwapi, PathFileExistsAName);
 }

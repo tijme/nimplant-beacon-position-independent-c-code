@@ -88,12 +88,12 @@ As stated, this is just a minimal Proof-of-Concept (PoC) showcasing a beacon in 
 - [⚠️] TODO: Support implant command `get-domain`.
 - [⚠️] TODO: Support implant command `get-local-admin`.
 - [⚠️] TODO: Support implant command `inline-execute`.
-- [⚠️] TODO: Support implant command `ls`.
+- [✅] Support implant command `ls`.
 - [⚠️] TODO: Support implant command `mkdir`.
 - [⚠️] TODO: Support implant command `mv`.
 - [⚠️] TODO: Support implant command `powershell`.
 - [⚠️] TODO: Support implant command `ps`.
-- [⚠️] TODO: Support implant command `pwd`.
+- [✅] Support implant command `pwd`.
 - [⚠️] TODO: Support implant command `reg`.
 - [⚠️] TODO: Support implant command `rm`.
 - [⚠️] TODO: Support implant command `run`.
