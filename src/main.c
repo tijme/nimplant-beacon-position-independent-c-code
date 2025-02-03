@@ -114,9 +114,8 @@
 #include "../inc/commands/whoami.c"
 #include "../inc/client.c"
 
-
 /**
- * The main function of your shellcode.
+ * The main function of our shellcode.
  * 
  * Using `InitializeRelocatable`, two Windows API functions are at our disposal.
  * Using these two functions, we can further utilize the Windows API.
