@@ -88,14 +88,14 @@ bool CommandLs(struct Relocatable* context, struct NimPlantConfig* config, struc
     context->functions.strcpy(fullPath, lpDirectoryPath);
     context->functions.strcat(fullPath, lpWildcard);
 
-    // Open directory
-    hFind = context->functions.FindFirstFileA(fullPath, &findFileData);
-    if (hFind == INVALID_HANDLE_VALUE) goto FAILURE_AND_RETURN;
-
     // Allocate memory for results
     size_t resultSize = 0;
     char* lpResultBuffer = context->functions.calloc(1, sizeof(char));
     if (lpResultBuffer == NULL) goto FAILURE_AND_RETURN;
+
+    // Open directory
+    hFind = context->functions.FindFirstFileA(fullPath, &findFileData);
+    if (hFind == INVALID_HANDLE_VALUE) goto FAILURE_AND_RETURN;
 
     // Iterate over directory entries
     do {
@@ -108,6 +108,7 @@ bool CommandLs(struct Relocatable* context, struct NimPlantConfig* config, struc
             context->functions.strcat(lpResultBuffer, findFileData.cFileName);
             context->functions.strcat(lpResultBuffer, lpNewLine);
         }
+
     } while (context->functions.FindNextFileA(hFind, &findFileData) != 0);
 
     // Close directory handle

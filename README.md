@@ -73,6 +73,7 @@ As stated, this is just a minimal Proof-of-Concept (PoC) showcasing a beacon in 
 - [✅] Retrieve metadata and send back to Nimplant server.
 - [✅] Support implant command `cat`.
 - [✅] Support implant command `cd`.
+- [✅] Support implant command `cp`.
 - [✅] Support implant command `whoami`.
 - [✅] Support implant command `ls`.
 - [✅] Support implant command `pwd`.
@@ -81,7 +82,6 @@ As stated, this is just a minimal Proof-of-Concept (PoC) showcasing a beacon in 
 - [⚠️] TODO: Support incremental delay if server not reachable.
 - [⚠️] TODO: Basic opsec such as string obfuscation.
 - [⚠️] TODO: Low coupling, high cohesion.
-- [⚠️] TODO: Support implant command `cp`.
 - [⚠️] TODO: Support implant command `curl`.
 - [⚠️] TODO: Support implant command `download`.
 - [⚠️] TODO: Support implant command `env`.

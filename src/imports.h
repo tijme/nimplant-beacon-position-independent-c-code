@@ -82,6 +82,7 @@ struct FunctionTable {
     HANDLE (*CreateFileA)(LPCSTR, DWORD, DWORD, LPSECURITY_ATTRIBUTES, DWORD, DWORD, HANDLE);
     BOOL (*CloseHandle)(HANDLE);
     BOOL (*ReadFile)(HANDLE, LPVOID, DWORD, LPDWORD, LPOVERLAPPED);
+    BOOL (*WriteFile)(HANDLE, LPCVOID, DWORD, LPDWORD, LPOVERLAPPED);
     DWORD (*GetFileSize)(HANDLE, LPDWORD);
     DWORD (*GetCurrentDirectoryA)(DWORD, LPSTR);
     HANDLE (*FindFirstFileA)(LPCSTR, LPWIN32_FIND_DATAA);
@@ -89,4 +90,5 @@ struct FunctionTable {
     BOOL (*FindClose)(HANDLE);
     DWORD (*GetFileAttributesA)(LPCSTR);
     BOOL (*PathFileExistsA)(LPCSTR);
+    DWORD (*GetFullPathNameA)(LPCSTR, DWORD, LPSTR, LPSTR);
 };
