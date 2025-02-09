@@ -171,11 +171,6 @@ int __main () {
         XorKey
     );
 
-    if (context.functions.GetFullPathNameA == NULL) return 4;
-    if (context.functions.CreateFileA == NULL) return 5;
-    if (context.functions.ReadFile == NULL) return 6;
-    if (context.functions.WriteFile == NULL) return 7;
-
     // Set `rand` seed
     context.functions.srand(context.functions.time(NULL));
 
