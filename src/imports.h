@@ -91,4 +91,5 @@ struct FunctionTable {
     DWORD (*GetFileAttributesA)(LPCSTR);
     BOOL (*PathFileExistsA)(LPCSTR);
     DWORD (*GetFullPathNameA)(LPCSTR, DWORD, LPSTR, LPSTR);
+    BOOL (*MoveFileA)(LPCSTR, LPCSTR);
 };

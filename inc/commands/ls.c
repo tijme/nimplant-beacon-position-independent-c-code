@@ -89,9 +89,12 @@ bool CommandLs(struct Relocatable* context, struct NimPlantConfig* config, struc
     context->functions.strcat(fullPath, lpWildcard);
 
     // Allocate memory for results
-    size_t resultSize = 0;
-    char* lpResultBuffer = context->functions.calloc(1, sizeof(char));
+    size_t resultSize = 2;
+    char* lpResultBuffer = context->functions.calloc(2 + 1, sizeof(char));
     if (lpResultBuffer == NULL) goto FAILURE_AND_RETURN;
+
+    // Add new line by default
+    context->functions.strcat(lpResultBuffer, lpNewLine);
 
     // Open directory
     hFind = context->functions.FindFirstFileA(fullPath, &findFileData);
@@ -101,12 +104,21 @@ bool CommandLs(struct Relocatable* context, struct NimPlantConfig* config, struc
     do {
         // Skip current (.) and parent (..) directories
         if (context->functions.strcmp(findFileData.cFileName, lpDot) != 0 && context->functions.strcmp(findFileData.cFileName, lpTwoDot) != 0) {
-            resultSize += context->functions.strlen(findFileData.cFileName) + 2; // +2 for newline and null terminator
+            
+            char entryBuffer[512];
+            if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+                DEFINE_STRING(lpDirectoryFormatter, "[DIR]                     %-50s\n");
+                context->functions.sprintf(entryBuffer, lpDirectoryFormatter, findFileData.cFileName);
+            } else {
+                DEFINE_STRING(lpFileFormatter, "[FILE] %10lu bytes   %-50s\n");
+                context->functions.sprintf(entryBuffer, lpFileFormatter, findFileData.nFileSizeLow, findFileData.cFileName);
+            }
+            
+            resultSize += context->functions.strlen(entryBuffer); // +2 for newline and null terminator
             lpResultBuffer = context->functions.realloc(lpResultBuffer, resultSize);
             if (lpResultBuffer == NULL) goto FAILURE_AND_RETURN;
 
-            context->functions.strcat(lpResultBuffer, findFileData.cFileName);
-            context->functions.strcat(lpResultBuffer, lpNewLine);
+            context->functions.strcat(lpResultBuffer, entryBuffer);
         }
 
     } while (context->functions.FindNextFileA(hFind, &findFileData) != 0);

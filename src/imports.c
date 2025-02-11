@@ -95,6 +95,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     DEFINE_STRING(GetFileAttributesAName, "GetFileAttributesA")
     DEFINE_STRING(PathFileExistsAName, "PathFileExistsA");
     DEFINE_STRING(GetFullPathNameAName, "GetFullPathNameA");
+    DEFINE_STRING(MoveFileA, "MoveFileA");
 
     // Load functions
     context->functions.rand = (int (*)(void)) context->functions.GetProcAddress(context->modules.hUcrtBase, RandName);
@@ -154,4 +155,5 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     context->functions.GetFileAttributesA = (DWORD (*)(LPCSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetFileAttributesAName);
     context->functions.PathFileExistsA = (BOOL (*)(LPCSTR)) context->functions.GetProcAddress(context->modules.hShlwapi, PathFileExistsAName);
     context->functions.GetFullPathNameA = (DWORD (*)(LPCSTR, DWORD, LPSTR, LPSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetFullPathNameAName);
+    context->functions.MoveFileA = (BOOL (*)(LPCSTR, LPCSTR)) context->functions.GetProcAddress(context->modules.hKernel32, MoveFileA);
 }

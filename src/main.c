@@ -113,6 +113,7 @@
 #include "../inc/commands/cd.c"
 #include "../inc/commands/cp.c"
 #include "../inc/commands/ls.c"
+#include "../inc/commands/mv.c"
 #include "../inc/commands/pwd.c"
 #include "../inc/commands/whoami.c"
 #include "../inc/client.c"
