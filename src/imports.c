@@ -26,6 +26,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     DEFINE_STRING(Advapi32Name, "Advapi32.dll");
     DEFINE_STRING(NtdllName, "Ntdll.dll");
     DEFINE_STRING(ShlwapiName, "Shlwapi.dll");
+    DEFINE_STRING(Shell32Name, "Shell32.dll");
 
     // Load modules
     context->modules.hKernel32 = context->functions.LoadLibraryA(Kernel32ModuleName);
@@ -37,6 +38,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     context->modules.hAdvapi32 = context->functions.LoadLibraryA(Advapi32Name);
     context->modules.hNtdll = context->functions.LoadLibraryA(NtdllName);
     context->modules.hShlwapi = context->functions.LoadLibraryA(ShlwapiName);
+    context->modules.hShell32 = context->functions.LoadLibraryA(Shell32Name);
 
     // Define functions
     DEFINE_STRING(RandName, "rand");
@@ -96,6 +98,7 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     DEFINE_STRING(PathFileExistsAName, "PathFileExistsA");
     DEFINE_STRING(GetFullPathNameAName, "GetFullPathNameA");
     DEFINE_STRING(MoveFileA, "MoveFileA");
+    DEFINE_STRING(ShellExecuteAName, "ShellExecuteA");
 
     // Load functions
     context->functions.rand = (int (*)(void)) context->functions.GetProcAddress(context->modules.hUcrtBase, RandName);
@@ -156,4 +159,6 @@ void PopulateModuleAndFunctionTables(struct Relocatable* context) {
     context->functions.PathFileExistsA = (BOOL (*)(LPCSTR)) context->functions.GetProcAddress(context->modules.hShlwapi, PathFileExistsAName);
     context->functions.GetFullPathNameA = (DWORD (*)(LPCSTR, DWORD, LPSTR, LPSTR)) context->functions.GetProcAddress(context->modules.hKernel32, GetFullPathNameAName);
     context->functions.MoveFileA = (BOOL (*)(LPCSTR, LPCSTR)) context->functions.GetProcAddress(context->modules.hKernel32, MoveFileA);
+    context->functions.ShellExecuteA = (HINSTANCE (*)(HWND, LPCSTR, LPCSTR, LPCSTR, LPCSTR, INT)) context->functions.GetProcAddress(context->modules.hShell32, ShellExecuteAName);
+
 }

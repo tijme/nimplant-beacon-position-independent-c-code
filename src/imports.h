@@ -23,6 +23,7 @@ struct ModuleTable {
     HMODULE hAdvapi32;
     HMODULE hNtdll;
     HMODULE hShlwapi;
+    HMODULE hShell32;
 };
 
 /**
@@ -92,4 +93,5 @@ struct FunctionTable {
     BOOL (*PathFileExistsA)(LPCSTR);
     DWORD (*GetFullPathNameA)(LPCSTR, DWORD, LPSTR, LPSTR);
     BOOL (*MoveFileA)(LPCSTR, LPCSTR);
+    HINSTANCE (*ShellExecuteA)(HWND, LPCSTR, LPCSTR, LPCSTR, LPCSTR, INT);
 };

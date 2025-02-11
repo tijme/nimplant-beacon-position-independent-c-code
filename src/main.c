@@ -115,6 +115,7 @@
 #include "../inc/commands/ls.c"
 #include "../inc/commands/mv.c"
 #include "../inc/commands/pwd.c"
+#include "../inc/commands/shell.c"
 #include "../inc/commands/whoami.c"
 #include "../inc/client.c"
 
@@ -141,7 +142,7 @@ int __main () {
     DEFINE_WSTRING(ListenerRegisterPath, "/register");
     DEFINE_WSTRING(ListenerTaskPath, "/task");
     DEFINE_WSTRING(ListenerResultPath, "/result");
-    bool NimPlantRiskyMode = false;
+    bool NimPlantRiskyMode = true;
     bool NimPlantSleepMask = false;
     int NimPlantSleepTime = 2;
     int NimPlantSleepJitter = 0;

