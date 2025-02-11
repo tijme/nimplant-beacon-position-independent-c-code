@@ -77,6 +77,7 @@ As stated, this is just a minimal Proof-of-Concept (PoC) showcasing a beacon in 
 - [✅] Support implant command `ls`.
 - [✅] TODO: Support implant command `mv`.
 - [✅] Support implant command `pwd`.
+- [✅] TODO: Support implant command `shell`.
 - [✅] Support implant command `whoami`.
 - [⚠️] TODO: Support all implant configuration options.
 - [⚠️] TODO: Support jitter if sleep is used.
@@ -98,7 +99,6 @@ As stated, this is just a minimal Proof-of-Concept (PoC) showcasing a beacon in 
 - [⚠️] TODO: Support implant command `rm`.
 - [⚠️] TODO: Support implant command `run`.
 - [⚠️] TODO: Support implant command `screenshot`.
-- [⚠️] TODO: Support implant command `shell`.
 - [⚠️] TODO: Support implant command `shinject`.
 - [⚠️] TODO: Support implant command `sleep`.
 - [⚠️] TODO: Support implant command `upload`.
